@@ -1,0 +1,9 @@
+{
+	"name": "agiproject101-dev-adf",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "341ab2de-38b1-4225-a3b4-d4fa1b54b348",
+		"tenantId": "c3f1b370-ff53-4e52-bd24-5fc8e8b79616"
+	}
+}
