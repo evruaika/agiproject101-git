@@ -1,9 +1,9 @@
 {
-	"name": "Get_Metadata",
+	"name": "ForEachActivity",
 	"properties": {
 		"activities": [
 			{
-				"name": "GetMetadata1",
+				"name": "Get_Metadata",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
@@ -29,13 +29,10 @@
 					"fieldList": [
 						"itemName",
 						"itemType",
-						"lastModified",
-						"childItems",
-						"itemName"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
