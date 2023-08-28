@@ -7,9 +7,9 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Check Input File",
+						"activity": "Wait5Sec",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -95,6 +95,22 @@
 				"userProperties": [],
 				"typeProperties": {
 					"waitTimeInSeconds": 10
+				}
+			},
+			{
+				"name": "Wait5Sec",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Check Input File",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 5
 				}
 			}
 		],
