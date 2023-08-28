@@ -20,7 +20,20 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "input//Conditional Split.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "output//Data.csv"
+					},
+					{
+						"name": "CopyAfterValidation",
+						"value": "Success"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
