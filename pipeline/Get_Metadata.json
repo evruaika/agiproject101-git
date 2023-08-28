@@ -22,10 +22,13 @@
 					"fieldList": [
 						"itemName",
 						"itemType",
-						"lastModified"
+						"lastModified",
+						"size",
+						"structure"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
