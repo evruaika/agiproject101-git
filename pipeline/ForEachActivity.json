@@ -72,13 +72,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "RawFolder",
+						"referenceName": "DataFiles",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"childItems",
 						"itemName",
-						"itemType"
+						"itemType",
+						"size"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
