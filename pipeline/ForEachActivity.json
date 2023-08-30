@@ -123,6 +123,47 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "IfCondition",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "GetMetadataFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(activity('GetMetadataFiles').output.size,250)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "WaitFalse5Secs",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 5
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "WaitTrue2Secs",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 2
+							}
+						}
+					]
+				}
 			}
 		],
 		"annotations": []
