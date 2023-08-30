@@ -73,10 +73,15 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "DataFiles",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"pFileName": "Conditional Split.csv"
+						}
 					},
 					"fieldList": [
-						"itemName",
+						"size",
+						"lastModified",
+						"structure",
 						"itemType"
 					],
 					"storeSettings": {
