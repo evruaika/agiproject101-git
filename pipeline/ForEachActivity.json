@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get_MetadataFolder",
+				"name": "GetMetadataFolder",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
@@ -56,7 +56,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Get_MetadataFolder",
+						"activity": "GetMetadataFolder",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -94,7 +94,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get_MetadataFolder",
+						"activity": "GetMetadataFolder",
 						"dependencyConditions": [
 							"Completed"
 						]
