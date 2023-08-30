@@ -1,9 +1,9 @@
 {
-	"name": "ForEachActivity",
+	"name": "ForEach_IF_Delete",
 	"properties": {
 		"activities": [
 			{
-				"name": "Get_MetadataFolder",
+				"name": "GetMetadataFolder",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
@@ -45,18 +45,25 @@
 			{
 				"name": "Wait10Secs",
 				"type": "Wait",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "DeleteFiles",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"waitTimeInSeconds": 10
 				}
 			},
 			{
-				"name": "Get_MetadataFiles",
+				"name": "GetMetadataFiles",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Get_MetadataFolder",
+						"activity": "GetMetadataFolder",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -72,12 +79,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "RawFolder",
-						"type": "DatasetReference"
+						"referenceName": "DataFiles",
+						"type": "DatasetReference",
+						"parameters": {
+							"pFileName": "Conditional Split.csv"
+						}
 					},
 					"fieldList": [
-						"childItems",
-						"itemName",
+						"size",
+						"lastModified",
+						"structure",
 						"itemType"
 					],
 					"storeSettings": {
@@ -95,7 +106,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get_MetadataFolder",
+						"activity": "GetMetadataFolder",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -104,12 +115,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get_MetadataFolder').output.childItems",
+						"value": "@activity('GetMetadataFolder').output.childItems",
 						"type": "Expression"
 					},
 					"activities": [
 						{
-							"name": "Wait2secs",
+							"name": "Wait2Seconds",
 							"type": "Wait",
 							"dependsOn": [],
 							"userProperties": [],
@@ -118,6 +129,74 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "IfCondition",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "GetMetadataFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greater(activity('GetMetadataFiles').output.size,161)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "WaitFalse5Secs",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 5
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "WaitTrue2Secs",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 2
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "DeleteFiles",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DataFiles",
+						"type": "DatasetReference",
+						"parameters": {
+							"pFileName": "Exists.csv"
+						}
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					}
 				}
 			}
 		],
