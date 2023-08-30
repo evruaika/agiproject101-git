@@ -138,7 +138,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('GetMetadataFiles').output.size,250)",
+						"value": "@greater(activity('GetMetadataFiles').output.size,300)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
