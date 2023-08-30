@@ -52,7 +52,7 @@
 				}
 			},
 			{
-				"name": "Get_MetadataFiles",
+				"name": "GetMetadataFiles",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
