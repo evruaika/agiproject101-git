@@ -1,0 +1,95 @@
+{
+	"name": "UntilFileExist",
+	"properties": {
+		"activities": [
+			{
+				"name": "UntilFileExist",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@variables('FileExist')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "GetMetadata",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS_Country",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"exists"
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "IfConditionExist",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "GetMetadata",
+									"dependencyConditions": [
+										"Completed"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"ifFalseActivities": [
+									{
+										"name": "WaitFalse4Secs",
+										"type": "Wait",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"waitTimeInSeconds": 4
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "WaitTrue2Secs",
+										"type": "Wait",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"waitTimeInSeconds": 2
+										}
+									}
+								]
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			}
+		],
+		"variables": {
+			"FileExist": {
+				"type": "Boolean",
+				"defaultValue": "False"
+			}
+		},
+		"annotations": []
+	}
+}
