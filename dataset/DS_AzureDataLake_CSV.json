@@ -10,6 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('Sales_In_',Item().Year,'.csv')",
+					"type": "Expression"
+				},
 				"fileSystem": "output"
 			},
 			"columnDelimiter": ",",

@@ -67,7 +67,7 @@
 										"Per_year": {
 											"type": "Int32",
 											"value": {
-												"value": "@item().Year",
+												"value": "@int(item().Year)",
 												"type": "Expression"
 											}
 										}
