@@ -14,7 +14,7 @@
 					},
 					"activities": [
 						{
-							"name": "GetMetadata",
+							"name": "GetMetadataCountry",
 							"type": "GetMetadata",
 							"dependsOn": [],
 							"policy": {
@@ -47,7 +47,7 @@
 							"type": "IfCondition",
 							"dependsOn": [
 								{
-									"activity": "GetMetadata",
+									"activity": "GetMetadataCountry",
 									"dependencyConditions": [
 										"Completed"
 									]
@@ -55,25 +55,34 @@
 							],
 							"userProperties": [],
 							"typeProperties": {
+								"expression": {
+									"value": "@activity('GetMetadataCountry').output.exists",
+									"type": "Expression"
+								},
 								"ifFalseActivities": [
 									{
-										"name": "WaitFalse4Secs",
+										"name": "Wait20Secs",
 										"type": "Wait",
 										"dependsOn": [],
 										"userProperties": [],
 										"typeProperties": {
-											"waitTimeInSeconds": 4
+											"waitTimeInSeconds": 20
 										}
 									}
 								],
 								"ifTrueActivities": [
 									{
-										"name": "WaitTrue2Secs",
-										"type": "Wait",
+										"name": "SetVariableExistTrue",
+										"type": "SetVariable",
 										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
 										"userProperties": [],
 										"typeProperties": {
-											"waitTimeInSeconds": 2
+											"variableName": "FileExist",
+											"value": true
 										}
 									}
 								]
