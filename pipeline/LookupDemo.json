@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": "Select CustomerID,\r\nNameStyle,\r\nTitle,\r\nFirstName,\r\nMiddleName,\r\nLastName\r\nFrom\r\nSalesLT.Customer",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
